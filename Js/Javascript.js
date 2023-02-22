@@ -70,8 +70,6 @@ search.addEventListener("input", (ev) => {
     }
     searchCount.innerText =
       count > 1 ? `${count} episodes found!` : `${count} episode found!`;
-
-    console.log(count);
   }
 });
 
