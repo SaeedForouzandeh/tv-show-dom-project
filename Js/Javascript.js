@@ -1,28 +1,28 @@
-// use this shit https://api.tvmaze.com/shows/82/episodes
+// Api : https://api.tvmaze.com/shows/82/episodes
 
 // get episodes
 function episodes() {
   fetch("https://api.tvmaze.com/shows/82/episodes")
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
       call(res);
     })
     .catch((err) => console.log(err));
 }
 
-// image name ep
+// Selecting HTML Elemts
 let content = document.querySelector(".content");
-
+let search = document.querySelector(".search-input");
+const searchCount = document.createElement("p");
+// showing Episodes card on page
 function call(res) {
   res.map((element) => {
     const card = document.createElement("div");
     card.classList.add("card");
     card.style.width = "18rem";
-    content.append(card);
+    card.style.height = "18rem";
 
     // create Element content
-    const block = document.createElement("section");
     const image = document.createElement("img");
     const name = document.createElement("h3");
     const number = document.createElement("h4");
@@ -41,7 +41,6 @@ function call(res) {
     image.src = element.image.medium;
     name.innerText = element.name;
     link.href = element.url;
-    // epsummery.innerText = element.summary;
 
     // chek Episode and season For this Format S01E04
     if (element.number <= 9) {
@@ -51,10 +50,30 @@ function call(res) {
     }
 
     //append
-    block.append(name);
-    link.append(block);
-    content.append(image, link, number, epsummery);
+    link.append(name);
+    content.append(searchCount, card);
+    card.append(image, link, number, epsummery);
   });
 }
 
+//search
+search.addEventListener("input", (ev) => {
+  let servalue = ev.target.value.toLowerCase();
+  let count = 0;
+  const allep = document.getElementsByClassName("card");
+  for (let i = 0; i < allep.length; i++) {
+    if (allep[i].innerText.toLowerCase().includes(servalue)) {
+      allep[i].classList.remove("is-hidden");
+      count++;
+    } else {
+      allep[i].classList.add("is-hidden");
+    }
+    searchCount.innerText =
+      count > 1 ? `${count} episodes found!` : `${count} episode found!`;
+
+    console.log(count);
+  }
+});
+
+//call Episodes function
 episodes();
