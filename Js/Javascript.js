@@ -13,14 +13,17 @@ function episodes() {
 // Selecting HTML Elemts
 let content = document.querySelector(".content");
 let search = document.querySelector(".search-input");
-const searchCount = document.createElement("p");
+const searchCount = document.querySelector(".search-result");
+const selectEpisode = document.querySelector(".select-episode");
+const defultEpisode = document.createElement("option");
+//Defult Episodes
+defultEpisode.innerText = "All Episodes";
+selectEpisode.append(defultEpisode);
 // showing Episodes card on page
 function call(res) {
   res.map((element) => {
     const card = document.createElement("div");
     card.classList.add("card");
-    card.style.width = "18rem";
-    card.style.height = "18rem";
 
     // create Element content
     const image = document.createElement("img");
@@ -28,8 +31,12 @@ function call(res) {
     const number = document.createElement("h4");
     const epsummery = document.createElement("p");
     const link = document.createElement("a");
-
     // end of Element content
+
+    //Select options
+    let option = document.createElement("option");
+    option.innerText = element.name;
+    selectEpisode.append(option);
 
     //remove tag P from first and last Paragraph
     let removep = element.summary;
@@ -51,7 +58,7 @@ function call(res) {
 
     //append
     link.append(name);
-    content.append(searchCount, card);
+    content.append(card);
     card.append(image, link, number, epsummery);
   });
 }
@@ -72,6 +79,18 @@ search.addEventListener("input", (ev) => {
       count > 1 ? `${count} episodes found!` : `${count} episode found!`;
   }
 });
+
+//select
+// selectEpisode.addEventListener("click", (se) => {
+//   let selectOption = se.target.value;
+//   const slop = document.getElementsByName("card");
+//   if (selectOption == slop) {
+//     slop.classList.remove("is-hidden");
+//   } else() {
+//     slop.classList.add("is-hidden");
+//   }
+//   console.log(se);
+// });
 
 //call Episodes function
 episodes();
