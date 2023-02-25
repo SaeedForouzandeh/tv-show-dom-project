@@ -35,7 +35,6 @@ function call(res) {
 
     //Select options
     let option = document.createElement("option");
-    option.innerText = element.name;
     selectEpisode.append(option);
 
     //remove tag P from first and last Paragraph
@@ -52,8 +51,10 @@ function call(res) {
     // chek Episode and season For this Format S01E04
     if (element.number <= 9) {
       number.innerText = `S0${element.season}E0${element.number}`;
+      option.innerText = `S0${element.season}E0${element.number}-${element.name}`;
     } else {
       number.innerText = `S0${element.season}E${element.number}`;
+      option.innerText = `S0${element.season}E${element.number}-${element.name}`;
     }
 
     //append
@@ -82,9 +83,12 @@ search.addEventListener("input", (ev) => {
 
 //select
 selectEpisode.addEventListener("click", (ev) => {
-  let servalue = ev.target.value.toLowerCase();
-
+  let servalue = ev.target.value.toLowerCase().slice(7);
   const allep = document.getElementsByClassName("card");
+
+  if (servalue == "sodes") {
+    servalue = "";
+  }
   for (let i = 0; i < allep.length; i++) {
     if (allep[i].innerText.toLowerCase().includes(servalue)) {
       allep[i].classList.remove("is-hidden");
