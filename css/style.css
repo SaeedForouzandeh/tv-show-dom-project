@@ -1,6 +1,14 @@
 .is-hidden {
   display: none;
 }
+.card {
+  border-radius: 10%;
+  padding: 1%;
+  background-color: #fbffa3;
+}
+body {
+  background-color: #083836;
+}
 header {
   display: flex;
   justify-content: center;
@@ -21,4 +29,23 @@ article {
   margin: 2%;
   width: 18%;
   height: 2%;
+}
+.search-input:focus {
+  box-shadow: 0px 0px 1px 1px #11530070, 1px 1px 1px 1px #0dfd4d70 !important;
+}
+
+html::-webkit-scrollbar {
+  border: 5px solid transparent;
+  border-radius: 100px;
+  background-color: #202020;
+  background-clip: padding-box;
+}
+html::-webkit-scrollbar-thumb {
+  border: 5px solid transparent;
+  border-radius: 100px;
+  background-color: #005100;
+  background-clip: padding-box;
+}
+html::-webkit-scrollbar-thumb:hover {
+  background-color: #155300a6;
 }

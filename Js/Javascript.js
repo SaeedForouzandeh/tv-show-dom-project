@@ -81,16 +81,18 @@ search.addEventListener("input", (ev) => {
 });
 
 //select
-// selectEpisode.addEventListener("click", (se) => {
-//   let selectOption = se.target.value;
-//   const slop = document.getElementsByName("card");
-//   if (selectOption == slop) {
-//     slop.classList.remove("is-hidden");
-//   } else() {
-//     slop.classList.add("is-hidden");
-//   }
-//   console.log(se);
-// });
+selectEpisode.addEventListener("click", (ev) => {
+  let servalue = ev.target.value.toLowerCase();
+
+  const allep = document.getElementsByClassName("card");
+  for (let i = 0; i < allep.length; i++) {
+    if (allep[i].innerText.toLowerCase().includes(servalue)) {
+      allep[i].classList.remove("is-hidden");
+    } else {
+      allep[i].classList.add("is-hidden");
+    }
+  }
+});
 
 //call Episodes function
 episodes();
